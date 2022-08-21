@@ -1,10 +1,13 @@
 const { info, warn, error } = require('./utils/logger');
 
-info('info arg');
-info(...Array.from({ length: 5 }, (_, i) => `${i} info arg`));
+const ARG = 'arg';
+const ARRAY_ARGS = Array.from({ length: 5 }, (_, i) => `${i} ${ARG} |`)
 
-warn('warn arg');
-warn(...Array.from({ length: 5 }, (_, i) => `${i} warn arg`));
+info(ARG);
+info(...ARRAY_ARGS);
 
-error('error arg');
-error(...Array.from({ length: 5 }, (_, i) => `${i} error arg`));
+warn(ARG);
+warn(...ARRAY_ARGS);
+
+error(ARG);
+error(...ARRAY_ARGS);

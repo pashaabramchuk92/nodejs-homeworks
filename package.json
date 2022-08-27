@@ -4,12 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js --file=package.json --dir=.",
     "start:debug": "node --inspect-brk app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "4.0.0"
+    "chalk": "4.0.0",
+    "yargs": "^17.5.1"
   }
 }

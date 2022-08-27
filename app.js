@@ -1,13 +1,17 @@
-const { info, warn, error } = require('./utils/logger');
+const yargs = require('yargs');
 
-const ARG = 'arg';
-const ARRAY_ARGS = Array.from({ length: 5 }, (_, i) => `${i} ${ARG} |`)
+const { success, error } = require('./utils/logger');
+const { seek, emitter } = require('./utils/file_seeker');
 
-info(ARG);
-info(...ARRAY_ARGS);
+const { file, dir } = yargs(process.argv).argv;
 
-warn(ARG);
-warn(...ARRAY_ARGS);
+if (!file || !dir) {
+    error('File and directory are required');
+    process.exit(1);
+}
 
-error(ARG);
-error(...ARRAY_ARGS);
+seek(file, dir);
+
+emitter
+    .on('success', success)
+    .on('fail', error);

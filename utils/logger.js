@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 
-const info = (...args) => {
+const success = (...args) => {
     console.log(chalk.green(...args));
 }
 
@@ -13,7 +13,7 @@ const error = (...args) => {
 }
 
 module.exports = {
-    info,
+    success,
     warn,
     error
 }

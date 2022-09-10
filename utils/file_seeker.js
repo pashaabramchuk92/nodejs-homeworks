@@ -2,23 +2,40 @@ const fsPromises  = require('fs/promises');
 const path = require('path');
 const EventEmitter = require('events');
 
+const { writeLogs } = require('./write_logs');
+
 const emitter = new EventEmitter();
+
+let _verbose = false;
+
+const setVerbose = (value) => {
+    _verbose = !!value;
+}
 
 const seek = async(file, dir) => {
     try {
         await fsPromises.access(dir);
         const files = await fsPromises.readdir(dir);
 
-        files.includes(file)
-            ? emitter.emit('success', path.join(dir, file))
-            : emitter.emit('fail', new Error('File not found'));
+        if (files.includes(file)) {
+            const data = path.join(dir, file);
 
+            _verbose && writeLogs('success', data);
+            emitter.emit('success', data)
+        } else {
+            const err = new Error('File not found');
+
+            _verbose && writeLogs('fail', err);
+            emitter.emit('fail', err)
+        }
     } catch(err) {
         emitter.emit('fail', err);
+        _verbose && writeLogs('fail', err);
     }
 }
 
 module.exports = {
     seek,
-    emitter
+    emitter,
+    setVerbose
 }

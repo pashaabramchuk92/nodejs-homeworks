@@ -2,7 +2,7 @@ const fsPromises  = require('fs/promises');
 const path = require('path');
 const EventEmitter = require('events');
 
-const { writeLogs } = require('./write_logs');
+const { writeLogs } = require('./events_logger');
 
 const emitter = new EventEmitter();
 

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js --file=package.json --dir=.",
     "start:verbose": "node app.js --file=package.json --dir=. --verbose",
-    "start:debug": "node --inspect-brk app.js"
+    "start:debug": "node --inspect-brk app.js",
+    "start:server": "node server.js"
   },
   "author": "",
   "license": "ISC",
